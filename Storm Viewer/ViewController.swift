@@ -1,13 +1,6 @@
-//
-//  ViewController.swift
-//  Storm Viewer
-//
-//  Created by João Pedro Carapina on 21/09/21.
-//
-
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UITableViewController {
     var pictures = [String]()
 
     override func viewDidLoad() {
@@ -18,13 +11,18 @@ class ViewController: UIViewController {
 
         for item in items {
             if item.hasPrefix("nssl") {
-                // this is a picture to load!
                 pictures.append(item)
-                print(pictures)
             }
         }
     }
-
-
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return pictures.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = pictures[indexPath.row]
+        return cell
+    }
 }
-
